@@ -17,6 +17,6 @@ COPY . /kolibri
 # for mounting the whl files into other docker containers
 VOLUME /kolibridist/
 CMD cd /kolibri && pip install -r requirements/vf.txt && pip install -r requirements/build.txt && \
-    yarn install && python -m kolibri plugin kolibri_instant_schools_plugin enable \
+    yarn install && python -m kolibri plugin kolibri_instant_schools_plugin enable && \
     make dist REQUIREMENTS=requirements/vf.txt && cp /kolibri/dist/* /kolibridist/
 
