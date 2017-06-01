@@ -8,3 +8,5 @@ sphinx-autobuild
 pex
 wheel
 setuptools<20.11,>=2.2          # needed to get pex working
+gcloud
+requests

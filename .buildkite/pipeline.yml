@@ -17,5 +17,5 @@ steps:
   - label: Build kolibri windows installer
     command: .buildkite/build_windows_installer.sh
 
-  - label: Upload artifacts on Google storage and comment artifacts media links on Github PR
+  - label: Upload artifacts
     command: .buildkite/upload_artifacts.py
