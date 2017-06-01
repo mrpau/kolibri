@@ -21,10 +21,6 @@ BUILD_NO = os.getenv("BUILDKITE_BUILD_NUMBER")
 
 ARTIFACT_DIR = "/kolibri/artifact"
 
-subprocess.call(["buildkite-agent artifact download 'dist/*.whl' %s" % ARTIFACT_DIR])
-subprocess.call(["buildkite-agent artifact download 'dist/*.zip' %s" % ARTIFACT_DIR])
-subprocess.call(["buildkite-agent artifact download 'dist/*.tar.gz' %s" % ARTIFACT_DIR])
-
 def create_github_comment(artifacts):
     """Create an comment on github.com using the given dict."""
     url = 'https://api.github.com/repos/%s/%s/issues/%s/comments' % (REPO_OWNER, REPO_NAME, ISSUE_ID)
@@ -75,6 +71,9 @@ def create_github_comment(artifacts):
 
 def collect_local_artifacts():
     artifacts_dict = []
+    subprocess.call(["buildkite-agent artifact download 'dist/*.whl' %s" % ARTIFACT_DIR])
+    subprocess.call(["buildkite-agent artifact download 'dist/*.zip' %s" % ARTIFACT_DIR])
+    subprocess.call(["buildkite-agent artifact download 'dist/*.tar.gz' %s" % ARTIFACT_DIR])
     for artifact in listdir(ARTIFACT_DIR):
         data = {"name": artifact,
                 "file_location": "%s/%s" % (ARTIFACT_DIR, artifact)}
