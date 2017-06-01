@@ -2,20 +2,20 @@ steps:
   - label: Build the docker environment
     command: make dockerenvbuild
 
-  - wait
-
-  - label: Build the python packages
-    command: mkdir -p dist && .buildkite/build_whl.sh && docker container prune -f
-
-  - wait
-
-  - label: Build the pex file
-    command: mkdir -p dist && .buildkite/build_pex.sh
-
-  - wait
-
-  - label: Build kolibri windows installer
-    command: .buildkite/build_windows_installer.sh
+#  - wait
+#
+#  - label: Build the python packages
+#    command: mkdir -p dist && .buildkite/build_whl.sh && docker container prune -f
+#
+#  - wait
+#
+#  - label: Build the pex file
+#    command: mkdir -p dist && .buildkite/build_pex.sh
+#
+#  - wait
+#
+#  - label: Build kolibri windows installer
+#    command: .buildkite/build_windows_installer.sh
 
   - label: Upload artifacts on Google storage and comment artifacts media links on Github PR
     command: python .buildkite/upload_artifact.py
