@@ -18,4 +18,4 @@ steps:
     command: .buildkite/build_windows_installer.sh
 
   - label: Upload artifacts on Google storage and comment artifacts media links on Github PR
-    command: python .buildkite/build_windows_installer.sh
+    command: python .buildkite/upload_artifact.py

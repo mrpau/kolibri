@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 # install latest python and nodejs
-RUN apt-get -y update
+RUN apt-get upgrade --fix-missing
 RUN apt-get install -y software-properties-common curl
 RUN add-apt-repository ppa:voronov84/andreyv
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
