@@ -12,5 +12,10 @@ steps:
   - label: Build the pex file
     command: mkdir -p dist && .buildkite/build_pex.sh
 
+  - wait
+
   - label: Build kolibri windows installer
     command: .buildkite/build_windows_installer.sh
+
+  - label: Upload artifacts on Google storage and comment artifacts media links on Github PR
+    command: python .buildkite/build_windows_installer.sh
