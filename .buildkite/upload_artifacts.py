@@ -5,8 +5,8 @@ import sys
 import logging
 
 from os import listdir
-from os.path import isfile, join
 from gcloud import storage
+import subprocess
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -19,8 +19,11 @@ REPO_NAME = "kolibri"
 RELEASE_DIR = 'release'
 BUILD_NO = os.getenv("BUILDKITE_BUILD_NUMBER")
 
-DIST_DIR = "/Users/mrpau-eduard/kolibri/dist"
+ARTIFACT_DIR = "/kolibri/artifact"
 
+subprocess.call(["buildkite-agent artifact download 'dist/*.whl' %s" % ARTIFACT_DIR])
+subprocess.call(["buildkite-agent artifact download 'dist/*.zip' %s" % ARTIFACT_DIR])
+subprocess.call(["buildkite-agent artifact download 'dist/*.tar.gz' %s" % ARTIFACT_DIR])
 
 def create_github_comment(artifacts):
     """Create an comment on github.com using the given dict."""
@@ -72,9 +75,9 @@ def create_github_comment(artifacts):
 
 def collect_local_artifacts():
     artifacts_dict = []
-    for artifact in listdir(DIST_DIR):
+    for artifact in listdir(ARTIFACT_DIR):
         data = {"name": artifact,
-                "file_location": "%s/%s" % (DIST_DIR, artifact)}
+                "file_location": "%s/%s" % (ARTIFACT_DIR, artifact)}
         logging.info("Collect file data: (%s)" % data)
         artifacts_dict.append(data)
     return artifacts_dict
