@@ -4,18 +4,18 @@ steps:
 
   - wait
 
-  - label: Build the python packages
-    command: mkdir -p dist && .buildkite/build_whl.sh && docker container prune -f
+  # - label: Build the python packages
+  #   command: mkdir -p dist && .buildkite/build_whl.sh && docker container prune -f
 
-  - wait
+  # - wait
 
-  - label: Build the pex file
-    command: mkdir -p dist && .buildkite/build_pex.sh
+  # - label: Build the pex file
+  #   command: mkdir -p dist && .buildkite/build_pex.sh
 
-  - wait
+  # - wait
 
-  - label: Build kolibri windows installer
-    command: .buildkite/build_windows_installer.sh
+  # - label: Build kolibri windows installer
+  #   command: .buildkite/build_windows_installer.sh
 
   - label: Upload artifacts
     command: python .buildkite/upload_artifacts.py
