@@ -15,5 +15,5 @@ RUN apt-get install -y python2.7 python3.6 python-pip git nodejs yarn gettext py
 COPY . /kolibri
 
 RUN pip install --upgrade gcloud && pip install requests
-VOLUME /kolibridist/  # for mounting the whl files into other docker containers
-CMD cd /kolibri && pip install --upgrade gcloud && pip install -r requirements/dev.txt && pip install -r requirements/build.txt && yarn install && make dist && cp /kolibri/dist/* /kolibridist/
+# VOLUME /kolibridist/  # for mounting the whl files into other docker containers
+CMD cd /kolibri && pip install -r requirements/dev.txt && pip install -r requirements/build.txt && yarn install && make dist && cp /kolibri/dist/* /kolibridist/
