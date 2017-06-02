@@ -18,4 +18,4 @@ steps:
     command: .buildkite/build_windows_installer.sh
 
   - label: Upload artifacts
-    command: .buildkite/upload_artifacts.py
+    command: python .buildkite/upload_artifacts.py
