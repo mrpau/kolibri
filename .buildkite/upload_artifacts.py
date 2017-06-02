@@ -71,9 +71,9 @@ def create_github_comment(artifacts):
 
 def collect_local_artifacts():
     artifacts_dict = []
-    subprocess.call(["buildkite-agent artifact download 'dist/*.whl' %s" % ARTIFACT_DIR])
-    subprocess.call(["buildkite-agent artifact download 'dist/*.zip' %s" % ARTIFACT_DIR])
-    subprocess.call(["buildkite-agent artifact download 'dist/*.tar.gz' %s" % ARTIFACT_DIR])
+    # subprocess.call(["buildkite-agent artifact download 'dist/*.whl' %s" % ARTIFACT_DIR])
+    # subprocess.call(["buildkite-agent artifact download 'dist/*.zip' %s" % ARTIFACT_DIR])
+    # subprocess.call(["buildkite-agent artifact download 'dist/*.tar.gz' %s" % ARTIFACT_DIR])
     for artifact in listdir(ARTIFACT_DIR):
         data = {"name": artifact,
                 "file_location": "%s/%s" % (ARTIFACT_DIR, artifact)}
