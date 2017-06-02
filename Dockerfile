@@ -17,4 +17,4 @@ COPY . /kolibri
 VOLUME /kolibridist/  # for mounting the whl files into other docker containers
 CMD cd /kolibri && pip install -r requirements/dev.txt && pip install -r requirements/build.txt && yarn install && make dist && cp /kolibri/dist/* /kolibridist/
 
-RUN pip install --upgrade google-cloud-storage && pip install requests
+RUN pip install --upgrade gcloud && pip install requests
