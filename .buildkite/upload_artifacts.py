@@ -19,7 +19,15 @@ REPO_NAME = "kolibri"
 RELEASE_DIR = 'release'
 BUILD_NO = os.getenv("BUILDKITE_BUILD_NUMBER")
 
-ARTIFACT_DIR = "/kolibri/artifact"
+PROJECT_PATH = os.path.join(os.getcwd())
+
+
+# Python packages artifact location
+DIST_DIR = os.path.join(PROJECT_PATH, "dist")
+
+# Windows installer artifact location
+EXE_BUILD_DIR = os.path.join(PROJECT_PATH, "windows_installer_docker_build")
+EXE_WINDOWS_DIR = os.path.join(EXE_BUILD_DIR, "windows")
 
 def create_github_comment(artifacts):
     """Create an comment on github.com using the given dict."""
@@ -71,12 +79,9 @@ def create_github_comment(artifacts):
 
 def collect_local_artifacts():
     artifacts_dict = []
-    subprocess.call(["buildkite-agent artifact download 'dist/*.whl' %s" % ARTIFACT_DIR])
-    subprocess.call(["buildkite-agent artifact download 'dist/*.zip' %s" % ARTIFACT_DIR])
-    subprocess.call(["buildkite-agent artifact download 'dist/*.tar.gz' %s" % ARTIFACT_DIR])
-    for artifact in listdir(ARTIFACT_DIR):
+    for artifact in listdir(DIST_DIR):
         data = {"name": artifact,
-                "file_location": "%s/%s" % (ARTIFACT_DIR, artifact)}
+                "file_location": "%s/%s" % (DIST_DIR, artifact)}
         logging.info("Collect file data: (%s)" % data)
         artifacts_dict.append(data)
     return artifacts_dict
