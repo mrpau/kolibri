@@ -12,22 +12,17 @@ logging.getLogger().setLevel(logging.INFO)
 
 USERNAME = os.getenv("GITHUB_USERNAME")
 PASSWORD = os.getenv('GITHUB_PASSWORD')
-ISSUE_ID = os.getenv("GITHUB_ISSUE_ID")
+ISSUE_ID = os.getenv("BUILDKITE_PULL_REQUEST")
 REPO_OWNER = "mrpau-eduard"
 REPO_NAME = "kolibri"
 
 RELEASE_DIR = 'release'
-BUILD_NO = os.getenv("BUILDKITE_BUILD_NUMBER")
 
 PROJECT_PATH = os.path.join(os.getcwd())
 
 
 # Python packages artifact location
 DIST_DIR = os.path.join(PROJECT_PATH, "dist")
-
-# Windows installer artifact location
-EXE_BUILD_DIR = os.path.join(PROJECT_PATH, "windows_installer_docker_build")
-EXE_WINDOWS_DIR = os.path.join(EXE_BUILD_DIR, "windows")
 
 def create_github_comment(artifacts):
     """Create an comment on github.com using the given dict."""
@@ -97,11 +92,14 @@ def upload_artifacts():
         if is_release:
             blob = bucket.blob('kolibri/%s/%s' % (RELEASE_DIR, file_data.get("name")))
         else:
-            blob = bucket.blob('kolibri/buildkite/build-%s/%s' % (BUILD_NO, file_data.get("name")))
+            blob = bucket.blob('kolibri/buildkite/build-%s/%s' % (ISSUE_ID, file_data.get("name")))
         blob.upload_from_filename(filename=file_data.get("file_location"))
         blob.make_public()
+
         file_data.update({'media_url': blob.media_link})
-    create_github_comment(artifacts)
+
+    if os.getenv("BUILDKITE_PULL_REQUEST") != "false":
+        create_github_comment(artifacts)
 
 
 def main():
