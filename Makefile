@@ -129,3 +129,7 @@ release_phase_increment:
 release_number_increment:
 	$(eval PART_INCREMENT = release_number)
 	$(BUMPVERSION_CMD)
+
+upload:
+	bash .buildkite/setup_and_upload_artifact.sh
+
