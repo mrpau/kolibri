@@ -131,5 +131,5 @@ release_number_increment:
 	$(BUMPVERSION_CMD)
 
 upload:
-	bash .buildkite/setup_and_upload_artifact.sh
+	python .buildkite/upload_artifacts.py
 

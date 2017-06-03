@@ -13,7 +13,7 @@ logging.getLogger().setLevel(logging.INFO)
 USERNAME = os.getenv("GITHUB_USERNAME")
 PASSWORD = os.getenv('GITHUB_PASSWORD')
 ISSUE_ID = os.getenv("BUILDKITE_PULL_REQUEST")
-REPO_OWNER = "mrpau-eduard"
+REPO_OWNER = "learningequality"
 REPO_NAME = "kolibri"
 
 RELEASE_DIR = 'release'
@@ -95,7 +95,6 @@ def upload_artifacts():
             blob = bucket.blob('kolibri/buildkite/build-%s/%s' % (ISSUE_ID, file_data.get("name")))
         blob.upload_from_filename(filename=file_data.get("file_location"))
         blob.make_public()
-
         file_data.update({'media_url': blob.media_link})
 
     if os.getenv("BUILDKITE_PULL_REQUEST") != "false":
