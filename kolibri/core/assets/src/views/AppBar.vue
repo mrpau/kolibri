@@ -21,11 +21,6 @@
         />
       </UiIconButton>
 
-      <div>
-        <div class="app-bar-title-icon"></div>
-        {{ title }}
-      </div>
-
       <div slot="actions">
         <slot name="app-bar-actions"></slot>
 
@@ -99,7 +94,7 @@
 
   import { mapGetters, mapState, mapActions } from 'vuex';
   import themeMixin from 'kolibri.coreVue.mixins.themeMixin';
-  import UiToolbar from 'keen-ui/src/UiToolbar';
+  import UiToolbar from 'kolibri.coreVue.components.UiToolbar';
   import UiIconButton from 'kolibri.coreVue.components.UiIconButton';
   import CoreMenu from 'kolibri.coreVue.components.CoreMenu';
   import CoreMenuOption from 'kolibri.coreVue.components.CoreMenuOption';
